@@ -216,16 +216,20 @@ export const DefaultFlash = ({
           {...props}>
           {hasIcon && icon.position === "left" && iconView}
           <View style={styles.flashLabel}>
-            <Text
-              style={[
-                styles.flashText,
-                hasDescription && styles.flashTitle,
-                !!message.color && { color: message.color },
-                titleStyle,
-              ]}>
-              {message.message}
-            </Text>
-            {!!renderCustomContent && renderCustomContent()}
+            {message.message.length > 0 &&
+              <Text
+                style={[
+                  styles.flashText,
+                  hasDescription && styles.flashTitle,
+                  !!message.color && { color: message.color },
+                  titleStyle,
+                ]}>
+                {message.message}
+              </Text>
+            }
+
+            {!!message.renderCustomContent && message.renderCustomContent()}
+
             {hasDescription && (
               <Text style={[styles.flashText, !!message.color && { color: message.color }, textStyle]}>
                 {message.description}
@@ -593,8 +597,8 @@ const styles = StyleSheet.create({
   },
   defaultFlash: {
     justifyContent: "flex-start",
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
     backgroundColor: "#696969",
     minHeight: OFFSET_HEIGHT,
   },
